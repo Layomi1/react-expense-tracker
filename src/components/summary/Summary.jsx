@@ -1,9 +1,8 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-// import { base } from "framer-motion/client";
-import React from "react";
 import TransactionForm from "../add-transaction/TransactionForm";
+import ChartSummary from "../chart/Chart";
 
-const Summary = ({ onClose, isOpen }) => {
+const Summary = ({ onClose, isOpen, totalIncome, totalExpense }) => {
   return (
     <Box
       p={"0"}
@@ -42,7 +41,7 @@ const Summary = ({ onClose, isOpen }) => {
             fontWeight={"bold"}
             mb={2}
           >
-            Balance is 100
+            Balance is ${totalIncome - totalExpense}
           </Heading>
           <Flex
             flexDirection={"column"}
@@ -57,7 +56,7 @@ const Summary = ({ onClose, isOpen }) => {
           >
             <Flex flexDirection={"column"}>
               <Heading color={"grey.700"} fontWeight={"bold"}>
-                $ 100
+                ${totalIncome}
               </Heading>
               <Text color={"grey.600"} fontSize={"small"}>
                 Total Income
@@ -66,7 +65,7 @@ const Summary = ({ onClose, isOpen }) => {
 
             <Flex flexDirection={"column"}>
               <Heading color={"grey.700"} fontWeight={"bold"}>
-                $ 100
+                $ {totalExpense}
               </Heading>
               <Text color={"grey.600"} fontSize={"small"}>
                 Total Expense
@@ -85,7 +84,9 @@ const Summary = ({ onClose, isOpen }) => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Heading fontWeight={"bold"}>Chart</Heading>
+          <Heading>
+            <ChartSummary expense={totalExpense} income={totalIncome} />
+          </Heading>
         </Box>
       </Flex>
       <TransactionForm onClose={onClose} isOpen={isOpen} />
